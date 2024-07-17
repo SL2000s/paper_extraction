@@ -9,7 +9,7 @@ class Proof(Statement):
     proof_explaination_html: Optional[str] = None
 
     def extend_explaination_html(self, overwrite: bool = True):
-        if overwrite or self.statement_motivation is None:
+        if overwrite or self.proof_explaination_html is None:
             self.proof_explaination_html = proof2explaination(
                 self.statement_html
             )

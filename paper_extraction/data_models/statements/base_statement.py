@@ -26,7 +26,7 @@ class Statement(BaseModel, ABC):
             self.statement_html = html
 
     def extend_motivation_html(self, overwrite: bool = True):
-        if overwrite or self.statement_motivation is None:
+        if overwrite or self.statement_motivation_html is None:
             self.statement_motivation_html = statement2motivation(
                 self.statement_html
             )
