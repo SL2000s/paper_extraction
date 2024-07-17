@@ -1,7 +1,10 @@
+from typing import Dict
+
 from ..extraction.tex_extraction.arxiv_extraction import ArxivExtraction
 from ..extraction.tex_extraction.arxiv_extraction import ArxivExtraction
 from ..extraction.tex_extraction.base_extraction import BaseExtraction
 from ..data_models.paper import Paper
+from ..data_models.statements.statements import Statements
 
 
 def extraction2paper(extraction: BaseExtraction):
@@ -11,6 +14,19 @@ def extraction2paper(extraction: BaseExtraction):
         source_url=extraction.get_paper_url(),
         bibtex=extraction.get_bibtex(),
         original_tex=extraction.get_tex(),
+    )
+    return paper
+
+
+def dict_extraction2paper(extraction: Dict):
+    paper = Paper(
+        title=extraction.get('title'),
+        authors=extraction.get('authors'),
+        source_url=extraction.get('paper_url'),
+        bibtex=extraction.get('bibtex'),
+        original_tex=extraction.get('tex'),
+        processed_original_tex=extraction.get('processed_tex'),
+        statements=Statements.model_validate(extraction.get('statements', {}))
     )
     return paper
 

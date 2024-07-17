@@ -1,9 +1,9 @@
 import warnings
 
 from pydantic import BaseModel, Field
-from typing import List, Optional
+from typing import Dict, List, Optional
 
-from ..builders.paper_builder import build_arxiv_paper
+from ..builders.paper_builder import build_arxiv_paper, dict_extraction2paper
 from ..config.config import PAPER_DATABASE_PATH
 from ..data_models.paper import Paper
 from ..data_models.statements.base_provable import Provable
@@ -47,6 +47,11 @@ class PaperDatabase(BaseModel):
             if arxiv_id in paper.source_url:
                 return paper
         return None
+
+    def add_dict_papers(self, papers: Dict[str, Dict]):
+        for paper_dict in papers.values():
+            if not self.paper_source_url2paper(paper_dict['paper_url']):
+                self.papers.append(dict_extraction2paper(paper_dict))
 
     def add_arxiv_paper(self, arxiv_id: str):
         if not self.arxiv_id2paper(arxiv_id):
