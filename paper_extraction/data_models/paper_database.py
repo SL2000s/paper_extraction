@@ -59,7 +59,7 @@ class PaperDatabase(BaseModel):
         else:
             warnings.warn(f'Arxiv paper {arxiv_id} already in database. Skipping it.')
 
-    def add_arxiv_papers(self, arxiv_ids: List[str]):  # TODO: don't add same paper twice
+    def add_arxiv_papers(self, arxiv_ids: List[str]):
         for arxiv_id in arxiv_ids:
             self.add_arxiv_paper(arxiv_id)
 
