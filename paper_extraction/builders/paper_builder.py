@@ -1,6 +1,6 @@
-from ..extracting.tex_extraction.arxiv_extraction import ArxivExtraction
-from ..extracting.tex_extraction.arxiv_extraction import ArxivExtraction
-from ..extracting.tex_extraction.base_extraction import BaseExtraction
+from ..extraction.tex_extraction.arxiv_extraction import ArxivExtraction
+from ..extraction.tex_extraction.arxiv_extraction import ArxivExtraction
+from ..extraction.tex_extraction.base_extraction import BaseExtraction
 from ..data_models.paper import Paper
 
 
