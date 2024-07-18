@@ -19,7 +19,11 @@ def load_requirements() -> list:
 setup(
     name='paper_extraction',
     version='0.1',
-    packages=find_packages() + ['paper_extraction.html_rendering.templates'],
+    packages=find_packages(),
+    package_data={
+        'paper_extraction.html_rendering.templates': ['templates/*.html.jinja'],
+    },
+    include_package_data=True,
     install_requires=load_requirements(),
     author='Simon Ljungbeck',
     author_email='simon.ljungbeck@idiap.ch',
