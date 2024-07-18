@@ -19,7 +19,7 @@ def load_requirements() -> list:
 setup(
     name='paper_extraction',
     version='0.1',
-    packages=find_packages(),
+    packages=find_packages() + ['paper_extraction.html_rendering.templates'],
     install_requires=load_requirements(),
     author='Simon Ljungbeck',
     author_email='simon.ljungbeck@idiap.ch',
