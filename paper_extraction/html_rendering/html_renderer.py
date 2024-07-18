@@ -28,8 +28,6 @@ class HTMLGenerator():
         self, paper_database, pages_root: str, root: str,
         jinja2_templates_root=JINJA2_TEMPLATES_ROOT
     ):
-        print(jinja2_templates_root)
-        input()
         self.paper_database = paper_database
         self.env = self._create_jinja2_env(jinja2_templates_root)
         self.pages_root = pages_root
