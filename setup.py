@@ -22,6 +22,7 @@ setup(
     packages=find_packages(),
     package_data={
         'paper_extraction.html_rendering': ['templates/*.html.jinja'],
+        'paper_extraction.html_rendering': ['assets/css/styles.css', 'assets/js/scripts.js'],
     },
     include_package_data=True,
     install_requires=load_requirements(),

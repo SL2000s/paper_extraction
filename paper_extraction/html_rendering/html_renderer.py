@@ -1,4 +1,6 @@
 import os
+import shutil
+import warnings
 
 from jinja2 import Environment, FileSystemLoader
 
@@ -80,7 +82,21 @@ class HTMLGenerator():
         with open(path, 'w') as f:
             f.write(output)
 
+    def _generate_assets_file(self):
+        src_dir = os.path.join(os.path.abspath(os.path.dirname(__file__)), 'assets')
+        dest_dir = os.path.join(self.root, 'assets')
+        os.makedirs(os.path.dirname(dest_dir), exist_ok=True)
+        try:
+            shutil.copytree(src_dir, dest_dir, dirs_exist_ok=True)
+        except shutil.Error as e:
+            warnings.warn(f'Error occurred while copying directory assets directory: {e}')
+        except OSError as e:
+            warnings.warn(f'OS error occurred when copying assets directory: {e}')
+
+
     def build_html_files(self):
+        self._generate_assets_file()
+
         self._render_template('index.html.jinja', {}, 'index.html')
         self._render_template('contact.html.jinja', {}, 'contact.html')
         self._render_template('examples.html.jinja', {}, 'examples.html')

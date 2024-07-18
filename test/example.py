@@ -2,7 +2,7 @@ from paper_extraction.builders.paper_database_builder import create_paper_databa
 from paper_extraction.builders.html_pages_builder import build_html_files
 
 
-test_db_path = '/remote/idiap.svm/temp.rea01/sljungbeck/lm_theory_library/test/test_db.json'
+test_db_path = '/remote/idiap.svm/temp.rea01/sljungbeck/lm_theory_library/test/test_db.json'     # TODO: change to universal paths
 pages_root = '/remote/idiap.svm/temp.rea01/sljungbeck/lm_theory_library/test/generated_pages'
 root = '/remote/idiap.svm/temp.rea01/sljungbeck/lm_theory_library/test/'
 
@@ -18,13 +18,13 @@ arxiv_papers = [
     # '2406.01506',
 ]
 
-# db = create_paper_database(
-#     path=test_db_path,
-#     extraction_dir='/remote/idiap.svm/temp.rea01/sljungbeck/lm_theory_library/test/tmp'
-# )
+db = create_paper_database(
+    path=test_db_path,
+    extraction_dir='/remote/idiap.svm/temp.rea01/sljungbeck/lm_theory_library/test/tmp'
+)
+# db = load_paper_database(test_db_path)
 
 
-db = load_paper_database(test_db_path)
 db.add_arxiv_papers(arxiv_papers)
 db.extend(overwrite=False)
 db.save()
