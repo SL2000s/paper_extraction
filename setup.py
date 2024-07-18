@@ -21,7 +21,7 @@ setup(
     version='0.1',
     packages=find_packages(),
     package_data={
-        'paper_extraction.html_rendering.templates': ['templates/*.html.jinja'],
+        'paper_extraction.html_rendering': ['templates/*.html.jinja'],
     },
     include_package_data=True,
     install_requires=load_requirements(),
