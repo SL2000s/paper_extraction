@@ -1,10 +1,10 @@
+import os
 import warnings
 
 from pydantic import BaseModel, Field
 from typing import Dict, List, Optional
 
 from ..builders.paper_builder import build_arxiv_paper, dict_extraction2paper
-from ..config.config import PAPER_DATABASE_PATH
 from ..data_models.paper import Paper
 from ..data_models.statements.base_provable import Provable
 from ..utils.tex_processing import statement2title
@@ -18,8 +18,10 @@ from ..config.config import (
 
 
 class PaperDatabase(BaseModel):
-    db_path: Optional[str] = PAPER_DATABASE_PATH
+    db_path: Optional[str] = None
     papers: List[Paper] = Field(default_factory=list)
+    extraction_dir: Optional[str] = '/tmp/paper_extraction'
+    pages_root: Optional[str] = None
 
     # def __init__(self, **data):
     #     super().__init__(**data)
@@ -55,7 +57,12 @@ class PaperDatabase(BaseModel):
 
     def add_arxiv_paper(self, arxiv_id: str):
         if not self.arxiv_id2paper(arxiv_id):
-            self.papers.append(build_arxiv_paper(arxiv_id))
+            self.papers.append(
+                build_arxiv_paper(
+                    arxiv_id,
+                    os.path.join(self.extraction_dir, 'arxiv_tex_extractions')
+                )
+            )
         else:
             warnings.warn(f'Arxiv paper {arxiv_id} already in database. Skipping it.')
 
@@ -140,7 +147,7 @@ class PaperDatabase(BaseModel):
 
     def extend_html_refs(self):
         for paper in self.papers:
-            paper.extend_statements_html_refs()
+            paper.extend_statements_html_refs(self.pages_root)
 
     def highest_library_nr(self, statement_type: str):
         highest = 0
@@ -184,7 +191,10 @@ class PaperDatabase(BaseModel):
 
     def save(self, path: str = None):
         path = path or self.db_path
-        json_str = self.model_dump_json(indent=4)
-        with open(path, 'w') as json_file:
-            json_file.write(json_str)
+        if path:
+            json_str = self.model_dump_json(indent=4)
+            with open(path, 'w') as json_file:
+                json_file.write(json_str)
+        else:
+            warnings.warn(f"Could not save database at path '{path}'!")
         return path

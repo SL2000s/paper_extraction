@@ -1,7 +1,6 @@
 import os
 
 from langchain_openai import AzureChatOpenAI
-from typing import Dict
 from langchain.prompts.prompt import PromptTemplate
 
 from ..config.llm_config import (

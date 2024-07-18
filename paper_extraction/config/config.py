@@ -1,14 +1,12 @@
 import os
 
 
-ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
-PAGES_ROOT = os.path.join(ROOT, 'generated_pages')
-JINJA2_TEMPLATES_ROOT = os.path.join(ROOT, 'templates')
-PAPER_DATABASE_PATH = os.path.join(ROOT, 'data', 'paper_database.json')
+PKG_ROOT = os.path.dirname(os.path.dirname(os.path.dirname(__file__)))
+JINJA2_TEMPLATES_ROOT = os.path.join(os.path.dirname(os.path.dirname(__file__)), 'html_rendering' , 'templates')
 
-DOTENV_PATH = os.path.join(ROOT, '.env')
+DOTENV_PATH = os.path.join(PKG_ROOT, '.env')
 
-ARXIV_EXTRACT_DIR = os.path.join(ROOT, 'data', 'tmp', 'arxiv_tex_extractions')
+# ARXIV_EXTRACT_DIR = os.path.join(ROOT, 'data', 'tmp', 'arxiv_tex_extractions')
 
 DEFINITION = 'definition'
 AXIOM = 'axiom'

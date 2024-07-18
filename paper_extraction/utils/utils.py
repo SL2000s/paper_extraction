@@ -9,7 +9,7 @@ import warnings
 INVALID_FILE_CHARS_PATTERN = regex.compile(r'[<>:"/\\|?*\x00-\x1F]')
 
 
-def extract_online_zip(url, extract_dir):
+def extract_online_zip(url, extraction_dir):
     response = requests.get(url, stream=True)
     if response.status_code == 200:
         file_bytes = io.BytesIO()
@@ -17,8 +17,8 @@ def extract_online_zip(url, extract_dir):
             file_bytes.write(chunk)
         file_bytes.seek(0)
         with tarfile.open(fileobj=file_bytes, mode='r:gz') as tar_ref:
-            tar_ref.extractall(extract_dir)
-        return extract_dir
+            tar_ref.extractall(extraction_dir)
+        return extraction_dir
     warnings.warn(f'Failed to download zip from {url}')
     return None
 

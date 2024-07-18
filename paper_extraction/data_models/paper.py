@@ -64,13 +64,13 @@ class Paper(BaseModel):
                     label2statementid[match] = statement.statement_id
             self.label2statementid = label2statementid
 
-    def extend_statements_html_refs(self):
+    def extend_statements_html_refs(self, pages_root):
         if self.label2statementid is None:
             self.extend_label2statementid(True)
         for statement in self.statements.all_statements_and_proofs():
-            self._extend_statement_html_refs(statement)
+            self._extend_statement_html_refs(statement, pages_root)
     
-    def _extend_statement_html_refs(self, statement):
+    def _extend_statement_html_refs(self, statement, pages_root):
         statement_html = statement.statement_html
 
         matches = TEX_REF_PATTERN.findall(statement_html)
@@ -83,7 +83,7 @@ class Paper(BaseModel):
                     statement_html = statement_html.replace(
                         sub_match,
                         STATEMENT_INTERLINK_TEMPLATE.format(
-                            url=f'{add_pages_root(ref_url)}#{urllib.parse.quote_plus(label_match)}',
+                            url=f'{add_pages_root(ref_url, pages_root)}#{urllib.parse.quote_plus(label_match)}',
                             text=ref_statement.library_name
                         )
                     )
@@ -98,7 +98,7 @@ class Paper(BaseModel):
                     statement_html = statement_html.replace(
                         sub_match,
                         STATEMENT_INTERLINK_TEMPLATE.format(
-                            url=f'{add_pages_root(ref_url)}#{urllib.parse.quote_plus(label_match)}',
+                            url=f'{add_pages_root(ref_url, pages_root)}#{urllib.parse.quote_plus(label_match)}',
                             text=ref_statement.library_name
                         )
                     )

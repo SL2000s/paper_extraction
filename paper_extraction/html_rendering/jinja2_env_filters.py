@@ -1,25 +1,23 @@
 import os
 
-from ..config.config import ROOT, PAGES_ROOT
 
-
-def capitalize_first(value):  # TODO: move filters to filter module
+def capitalize_first(value):
     if not value:
         return value
     return value[0].upper() + value[1:]
 
 
-def add_pages_root(path):
+def add_pages_root(path, pages_root):
     if not path:
         return path
-    path = os.path.join(PAGES_ROOT, path)
+    path = os.path.join(pages_root, path)
     return path
 
 
-def add_root(path):
+def add_root(path, root):
     if not path:
         return path
-    path = os.path.join(ROOT, path)
+    path = os.path.join(root, path)
     return path
 
 
@@ -38,16 +36,11 @@ def code_list(lst):
     return ',\n'.join(lst) + '\n'
 
 
-def link_list(str2url_dict):
+def link_list(str2url_dict, pages_root):
     sb = []
     for text, url in str2url_dict.items():
-        sb.append(f'<a href="{add_pages_root(url)}">{text}</a>')
+        sb.append(f'<a href="{add_pages_root(url, pages_root)}">{text}</a>')
     return text_list(sb)
-    # if len(sb) == 1:
-    #     return sb[0]
-    # if len(sb) == 2:
-    #     return  f'{sb[0]} and {sb[1]}'
-    # return f'{", ".join(sb[:-1])}, and {sb[-1]}'
 
 
 def add_html_tabs_newlines(s):
@@ -55,9 +48,11 @@ def add_html_tabs_newlines(s):
     s = s.replace('\t', '&emsp;')
     return s
 
+
 def replace_tabs_by_spaces(s):
     s = s.replace('\t', '  ')
     return s
+
 
 def escape_backslashes(s):
     s = s.replace('\\', '\\\\')
