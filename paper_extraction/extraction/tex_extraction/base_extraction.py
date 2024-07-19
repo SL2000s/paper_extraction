@@ -16,6 +16,10 @@ class BaseExtraction(ABC):
         """Default authors"""
         return []
 
+    def get_year(self) -> int:
+        """Default year"""
+        return None
+
     def get_paper_url(self) -> str:
         """Default paper url"""
         return ''

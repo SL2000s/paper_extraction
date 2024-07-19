@@ -10,6 +10,7 @@ def extraction2paper(extraction: BaseExtraction):
     paper = Paper(
         title=extraction.get_title(),
         authors=extraction.get_authors(),
+        year=extraction.get_year(),
         source_url=extraction.get_paper_url(),
         bibtex=extraction.get_bibtex(),
         original_tex=extraction.get_tex(),
@@ -21,6 +22,7 @@ def dict_extraction2paper(extraction: Dict):
     paper = Paper(
         title=extraction.get('title'),
         authors=extraction.get('authors'),
+        year=extraction.get('year'),
         source_url=extraction.get('paper_url'),
         bibtex=extraction.get('bibtex'),
         original_tex=extraction.get('tex'),

@@ -24,6 +24,7 @@ class Paper(BaseModel):
     paper_id: str = Field(default_factory=lambda: str(uuid4()))
     title: Optional[str] = None
     authors: Optional[List[str]] = None
+    year: Optional[int] = None
     source_url: Optional[str] = None
     html_url: Optional[str] = None
     bibtex: Optional[str] = None
