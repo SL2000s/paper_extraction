@@ -96,6 +96,7 @@ def statement2title(tex: str):
 def _post_process_llm_ans_tex2html(html: str):
     html = GPT4O_ITALICS_PATTERN.sub(ITALICS_RE_SUBSTITUTION_PATTERN, html)
     html = html.replace('\\mathds', '\\mathbf')                           # hardcoded substitution
+    html = html.replace('\\bm', '\\mathbf')                           # hardcoded substitution
     return html
 
 
