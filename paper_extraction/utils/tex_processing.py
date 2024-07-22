@@ -27,7 +27,7 @@ MACRO_PATTERNS_TO_MATHJAX = [  # list of (compile_regex, template strings where 
     (regex.compile(r'\\newcommand\{\\(\w+)\}\[1\]\{(([^{}]*(\{(?:[^{}]|(?2))*\})*)*)\}'), '{}: ["{{{}}}", 1]'),  # TODO: don't hardcode numbers
     (regex.compile(r'\\newcommand\{\\(\w+)\}\[2\]\{(([^{}]*(\{(?:[^{}]|(?2))*\})*)*)\}'), '{}: ["{{{}}}", 2]'),  # TODO: don't hardcode numbers
     (regex.compile(r'\\newcommand\{\\(\w+)\}\[3\]\{(([^{}]*(\{(?:[^{}]|(?2))*\})*)*)\}'), '{}: ["{{{}}}", 3]'),  # TODO: don't hardcode numbers
-    (regex.compile(r'\\def\s*\\(\w+)\{(([^{}]*(\{(?:[^{}]|(?2))*\})*)*)\}', '{}: "{{{}}}"'))
+    (regex.compile(r'\\def\s*\\(\w+)\{(([^{}]*(\{(?:[^{}]|(?2))*\})*)*)\}'), '{}: "{{{}}}"')
 ]
 
 PROMPT_TEMPLATE_TITLE = PromptTemplate.from_template(
