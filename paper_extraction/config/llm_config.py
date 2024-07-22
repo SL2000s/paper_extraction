@@ -90,7 +90,14 @@ STATEMENT:
 PROMPT_TEMPLATE_PROOF_EXPLANATION = """
 Generate a short explaination of the different steps in the proof below.
 Output a text that can be shown on a webpage (that uses MathJax).
+Use <br> to show new lines on the webpage.
 Output only the text.
+
+Example:
+PROOF:
+\\begin{equation*}\n     \\Exp [\\Dm_{kj} \\Dm_{k'j}] = \\sum_{zz'} \\Xm_{kz} \\Xm_{k'z'} \\Exp[\\Wm_{zj}\\Wm_{z'j}] = \\sigma^2 \\sum_{z}\\Xm_{kz}\\Xm_{k'z} = \\frac{1}{d}\\langle \\Xm_k, \\Xm_{k'} \\rangle.\n\\end{equation*}",
+OUTPUT:
+To understand the proof, let's break it down into several steps:\n<br>\n<br>1. <i></i>Expectation of Product<i></i>: The proof begins by considering the expectation of the product of two elements, \\(\\Dm_{kj}\\) and \\(\\Dm_{k'j}\\). This is expressed as:\n<br>   \\[\n   \\Exp [\\Dm_{kj} \\Dm_{k'j}]\n   \\]\n<br>\n<br>2. <i></i>Substitution with Sum<i></i>: Next, the elements \\(\\Dm_{kj}\\) and \\(\\Dm_{k'j}\\) are substituted with their respective sums involving \\(\\Xm\\) and \\(\\Wm\\):\n<br>   \\[\n   \\sum_{zz'} \\Xm_{kz} \\Xm_{k'z'} \\Exp[\\Wm_{zj}\\Wm_{z'j}]\n   \\]\n<br>\n<br>3. <i></i>Expectation of \\(\\Wm\\) Terms<i></i>: The expectation \\(\\Exp[\\Wm_{zj}\\Wm_{z'j}]\\) is simplified using the property that \\(\\Wm_{zj}\\) and \\(\\Wm_{z'j}\\) are independent and identically distributed with variance \\(\\sigma^2\\). This results in:\n<br>   \\[\n   \\sigma^2 \\sum_{z}\\Xm_{kz}\\Xm_{k'z}\n   \\]\n<br>\n<br>4. <i></i>Inner Product Representation<i></i>: Finally, the sum \\(\\sum_{z}\\Xm_{kz}\\Xm_{k'z}\\) is recognized as the inner product \\(\\langle \\Xm_k, \\Xm_{k'} \\rangle\\), and the factor \\(\\sigma^2\\) is adjusted by the dimension \\(d\\):\n<br>   \\[\n   \\frac{1}{d}\\langle \\Xm_k, \\Xm_{k'} \\rangle\n   \\]\n<br>\n<br>Thus, the proof shows that:\n<br>\\[\n\\Exp [\\Dm_{kj} \\Dm_{k'j}] = \\frac{1}{d}\\langle \\Xm_k, \\Xm_{k'} \\rangle\n\\]
 
 PROOF:
 {{proof_html}}
