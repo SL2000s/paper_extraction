@@ -75,14 +75,15 @@ def expand_tex_restatables(tex):
 
 
 def mathjax_macros(tex: str):
-    mathjax_macros = []
+    mathjax_macros = [   # extra (hardcoded) macros
+        'emph: ["\\\\textit{#1}", 1]',
+        'mathds: ["\\\\mathbf{#1}", 1]',
+        'bm: ["\\\\boldsymbol{\\\\mathbf{#1}}", 1]',
+    ]
     for pattern, sub_template in MACRO_PATTERNS_TO_MATHJAX:
         matches = pattern.findall(tex)
         for match in matches:
             mathjax_macros.append(sub_template.format(*match).replace('\\', '\\\\').replace('\n', ''))
-    mathjax_macros.extend([   # extra (hardcoded) macros
-        'emph: ["{\\\\textit{#1}}", 1]',
-    ])
     return mathjax_macros
 
 
@@ -96,8 +97,6 @@ def statement2title(tex: str):
 
 def _post_process_llm_ans_tex2html(html: str):
     html = GPT4O_ITALICS_PATTERN.sub(ITALICS_RE_SUBSTITUTION_PATTERN, html)
-    html = html.replace('\\mathds', '\\mathbf')                           # hardcoded substitution
-    html = html.replace('\\bm', '\\mathbf')                           # hardcoded substitution
     return html
 
 
