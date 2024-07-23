@@ -100,6 +100,7 @@ class HTMLGenerator():
         self._render_template('index.html.jinja', {}, 'index.html')
         self._render_template('contact.html.jinja', {}, 'contact.html')
         self._render_template('examples.html.jinja', {}, 'examples.html')
+        self._render_template('contribute.html.jinja', {}, 'contribute.html')
         
         self._render_template(
             'library_index.html.jinja',
